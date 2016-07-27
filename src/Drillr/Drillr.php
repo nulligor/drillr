@@ -1,41 +1,97 @@
 <?php 
+/*
+ * This file is part of the Drillr package, a project by Igor Soares.
+ *
+ * (c) 2016 Igor Soares
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * Drillr, see usage specifications at README.md
+ *
+ * @author      Igor Soares <igor.larcs@gmail.com>
+ */
 class Drillr
 {
-	/*
-		[TODO before Github]
-				//na suite de teste, fazer um bootstrap pra ficar suave sacas??
-				//ai a cena é meter o loco mesmo saca
-				//se sair documentando tudo também
-				//teoricamente eu ia mudar e fazer como se fosse um singleton, MAS ANTES ISSO CONFIGURAR TDD
+    /**
+     * @var string The instance of the class.
+     */
+	private static $instance = null;
 
-		 - Make it a singleton
-		 - Make tests suite
-		 - Make demo folder with the iterations n shit
-	*/
+    /**
+     * @var string Main path of the templating/views folder.
+     */
+	private $path; 
 
+    /**
+     * @var string Main path of the html iterable block.
+     */
+	private $block; 
 
-	private $path, $block, $break, $wrapper, $filter = array();
+    /**
+     * @var string break dom container.
+     * Suppose you want to add a <br/> for ever 2 iterated elements, thats a "breaker"	
+     */
+	private $break; 
+
+    /**
+     * @var string wrapper dom container.
+     * Suppose you want to add a <div class='xyz'> </div> for EVERY iterated element, thats a "wrapper"
+     * 	you can add as much as you want, just as breakers.	
+     */
+	private $wrapper; 
+
+    /**
+     * @var array filter functions container.
+     */
+	private $filter = array();
 	
-	public function __construct($path = null)
+    /**
+	 * Returns the Drillr Object
+     *
+     * @return single Drillr object instance
+     */
+	public static function getInstance()
 	{
-		if($path)
+		if(!isset(self::$instance))
 		{
-			$this->path = $path;
-		}
+			self::$instance = new Drillr();
+		}	
+		return self::$instance;
 	}
 
+    /**
+	 * Add string to path
+     *
+     * @param string $str
+     * @return this		
+     */
 	public function addToPath($str)
 	{
 		$this->path .= $str;
 		return $this;
 	}
 
+    /**
+	 * Changes path to the string specified
+     *
+     * @param string $str
+     * @return this		
+     */
 	public function changePath($str)
 	{
 		$this->path = $str;
 		return $this;
 	}
 
+    /**
+	 * Add html block to the block variable by its filename
+     *
+     * @param string $str 
+     * @return $this		
+     */
 	public function loadBlock($str)
 	{
 		if(file_exists($this->path.$str))
@@ -45,18 +101,41 @@ class Drillr
 		return $this;
 	}
 
+    /**
+	 * Adds the break dom element as long as its "ocurrence value"
+     * (occurs every 2, 3 elements, etc)
+     * @param int $num
+     * @param string $dom
+     * @return this		
+     */
 	public function addBreak($num, $dom)
 	{
 		$this->break = array($num => $dom);
 		return $this;
 	}
 
+    /**
+	 * Adds the wrapper dom element as long as its "ocurrence value"
+     * (wrap every 2, 3 element, etc)
+     * @param int $num
+     * @param string $dom
+     * @param string $dom2
+     * @return this		
+     */
 	public function addWrapper($num, $dom1, $dom2)
 	{
 		$this->wrapper = array($num => array($dom1,$dom2));
 		return $this;
 	}
 
+    /**
+	 * Adds a single filter function to the filter array 
+	 *  $drillr->addFilter("functionName", array('param1','param2'),'target_value_at_dom_element')
+     * @param string $func
+     * @param array $params
+     * @param string $elem
+     * @return this		
+     */
 	public function addFilter($func,$params,$elem)
 	{
 		if(!$this->filter)
@@ -70,11 +149,24 @@ class Drillr
 		return $this;
 	}
 
-	public function iterate($params)
+    /**
+	 * Iterates the collection  
+     * @param array $collection
+     * @return true		
+     */
+	public function drill($collection)
 	{
-		$this->outputHandler(iterator_to_array($this->blockLevelHandler($params)));
+		$this->outputHandler(iterator_to_array($this->blockLevelHandler($collection)));
+		$this->filter   = array();
+		$this->wrapper  = null;
+		$this->break    = null;
+		return true;
 	}
 
+    /**
+	 * Handles the output (duh)  
+     * @param array $blocks (serialized by the drill function)
+     */
 	private function outputHandler($blocks)
 	{
 		if(!$this->wrapper)
@@ -108,6 +200,10 @@ class Drillr
 		}
 	}
 
+    /**
+	 * Ouputs the break  
+     * @param int $i 
+     */
 	private function breakHandler($i)
 	{
 		if($this->break)
@@ -120,14 +216,22 @@ class Drillr
 
 	}
 
-	private function blockLevelHandler($params)
+    /**
+	 * Handles the iteration at block-level
+     * @param array $collection 
+     */
+	private function blockLevelHandler($collection)
 	{
-		foreach($params as $single_param)
+		foreach($collection as $single_param)
 		{
 			yield $this->parameterLevelHandler($this->block, $single_param);
 		}
 	}
-	
+    /**
+	 * Handles the iteration at parameter level, also applies the filters
+     * @param string $block 
+     * @param array $single_param 
+     */
 	private function parameterLevelHandler($block, $single_param)
 	{
 		foreach($single_param as $key => $val)
@@ -142,4 +246,15 @@ class Drillr
 		}
 		return $block;
 	}	
+
+    /**
+	 * User mostly for debugging purposes
+     * @param string $var 
+     * @return $this->$var 
+     */
+	public function _expose($var)
+	{
+		return $this->$var;
+	}
+
 }

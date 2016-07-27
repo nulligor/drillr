@@ -1,0 +1,16 @@
+{
+    "name": "ripfoghorn/drillr",
+    "description": "Forget about for-each loops",
+    "keywords": ["iteration", "templating"],
+    "homepage": "http://github.com/ripfoghorn/drillr",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Igor Soares",
+            "email": "igor.larcs@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
