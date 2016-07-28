@@ -1,4 +1,4 @@
-Drillr :nut_and_bolt:
+Drillr :cyclone:
 ====
 
 ### Forget about for-each loops when iterating Markdown code
