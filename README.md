@@ -59,7 +59,7 @@ $drillr->addFilter('testFilter',array('dummy_data'), 'dummy_data')->drill($colle
 <span>filtered foo</span><span>filtered bar</span>
 ```
 
-Theres a lot of other silly things you can do with Drillr and hopefully much more in the near future :simple_smile:
+Theres a lot of other silly things you can do with Drillr and hopefully much more in the near future :)
 
 TODO:
  * Add perhaps demo folder with usage samples
