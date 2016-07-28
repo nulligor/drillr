@@ -52,7 +52,7 @@ function testFilter($param)
 
 $drillr->addFilter('testFilter',array('dummy_data'), 'dummy_data')->drill($collection);
 ```
-
+Will output:
 ```html
 <span>filtered foo</span><span>filtered bar</span>
 ```
