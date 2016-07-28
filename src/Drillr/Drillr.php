@@ -248,7 +248,7 @@ class Drillr
 	}	
 
     /**
-	 * User mostly for debugging purposes
+	 * User mostly for debugging/testing purposes
      * @param string $var 
      * @return $this->$var 
      */

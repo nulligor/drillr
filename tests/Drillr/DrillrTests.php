@@ -68,6 +68,6 @@ class DrillrTests extends PHPUnit_Framework_TestCase
         $this->assertEmpty($filters);
     }
 
-    //TODO: Finish tests
+    //TODO: Finish tests :^P
 
 }

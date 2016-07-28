@@ -1,9 +1,9 @@
-Drillr
+Drillr :nut_and_bolt:
 ====
 
-### Forget about for-each loops when iterating HTML code
+### Forget about for-each loops when iterating Markdown code
 
-Drillr is pretty simple and straightforward library made to automate procedural for-each loops that iterates passing collections of data
+Drillr is pretty simple and straightforward library made to automate procedural for-each loops that iterates "view blocks" passing collections of data
 (which is a pretty common thing, even nowadays)
 
 ### A little background  
@@ -14,30 +14,33 @@ The place I used to work (as a spaghetti PHP developer) had a pretty methodic wo
  * Me, the back-end was responsible to code afterwards, on top of dozens of static pages
 
 Well, the thing is, I didn't have much contact with MVC, or any frameworks and templating engines at all back in the day, so I had the idea to automate the for-each loops
-and encapsulate all the "blocks" into tiny template partials (which is what this class is all about).
+and encapsulate all the "blocks" into tiny template partials and reuse them as iterating blocks.
 
 Using Drillr
 ----------
 
 Get the singleton instance of it and declare (or fetch) a dummy collection:
 ```php
+require 'path/to/Drillr.php';
 $collection = array( array('dummy_data' => 'foo'), array('dummy_data' => 'bar') );
 $drillr = Drillr::getInstance();
 ```
 
-Create some random templates lets say I put this simple html file called DrillrTest.html inside a random, lets say, "public/templates" folder:
+Create some random templates lets say I put this simple html file called DrillrTest.html inside a random folder "public/templates":
 ```html
 <span>{{dummy_data}}</span>
 ```
 
 Then simply point where the html block is and use the drill() method to iterate over the collection  
 ```php
-$collection = array( array('dummy_data' => 'foo'), array('dummy_data' => 'bar') );
+$collection = array( array('dummy_data' => 'foo'), 
+					 array('dummy_data' => 'bar') 
+					);
 $drillr = Drillr::getInstance();
 $drillr->addToPath(__DIR__.'/public/templates/')->loadBlock('DrillrTest.html')->drill($collection);
 ```
 
-Your outputs gonna be:
+Your output:
 ```html
 <span>foo</span><span>bar</span>
 ```
@@ -48,6 +51,7 @@ function testFilter($param)
 {
     return 'filtered '. $param;
 }
+
 $drillr->addFilter('testFilter',array('dummy_data'), 'dummy_data')->drill($collection);
 ```
 
@@ -55,8 +59,9 @@ $drillr->addFilter('testFilter',array('dummy_data'), 'dummy_data')->drill($colle
 <span>filtered foo</span><span>filtered bar</span>
 ```
 
-Theres a lot of other silly features to it :) 
+Theres a lot of other silly things you can do with Drillr and hopefully much more in the near future :simple_smile:
 
 TODO:
- * Add perhaps demo folder with lots of demonstration and usage samples
- * Finish the testing suite ;P
+ * Add perhaps demo folder with usage samples
+ * Finish the testing suite :stuck_out_tongue_closed_eyes:
+ * Add error handling
