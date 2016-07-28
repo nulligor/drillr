@@ -3,7 +3,7 @@ Drillr :nut_and_bolt:
 
 ### Forget about for-each loops when iterating Markdown code
 
-Drillr is pretty simple and straightforward library made to automate procedural for-each loops that iterates "view blocks" passing collections of data
+Drillr is a pretty simple and straightforward library made to automate procedural for-each loops that iterates "view blocks" passing collections of data
 (which is a pretty common thing, even nowadays)
 
 ### A little background  
