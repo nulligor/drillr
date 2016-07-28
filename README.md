@@ -22,7 +22,6 @@ Using Drillr
 Get the singleton instance of it and declare (or fetch) a dummy collection:
 ```php
 require 'path/to/Drillr.php';
-$collection = array( array('dummy_data' => 'foo'), array('dummy_data' => 'bar') );
 $drillr = Drillr::getInstance();
 ```
 
