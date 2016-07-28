@@ -35,7 +35,6 @@ Then simply point where the html block is and use the drill() method to iterate 
 $collection = array( array('dummy_data' => 'foo'), 
 					 array('dummy_data' => 'bar') 
 					);
-$drillr = Drillr::getInstance();
 $drillr->addToPath(__DIR__.'/public/templates/')->loadBlock('DrillrTest.html')->drill($collection);
 ```
 
