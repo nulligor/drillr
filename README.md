@@ -19,7 +19,7 @@ and encapsulate all the "blocks" into tiny template partials and reuse them as i
 Using Drillr
 ----------
 
-Get the singleton instance of it and declare (or fetch) a dummy collection:
+Get the singleton instance of it:
 ```php
 require 'path/to/Drillr.php';
 $drillr = Drillr::getInstance();
@@ -30,7 +30,7 @@ Create some random templates lets say I put this simple html file called DrillrT
 <span>{{dummy_data}}</span>
 ```
 
-Then simply point where the html block is and use the drill() method to iterate over the collection  
+Declare (or fetch) a dummy (or an actual) collection then simply point where the html block is and use the drill() method to iterate over the collection  
 ```php
 $collection = array( array('dummy_data' => 'foo'), 
 					 array('dummy_data' => 'bar') 
