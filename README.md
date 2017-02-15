@@ -32,9 +32,7 @@ Create some random templates lets say I put this simple html file called DrillrT
 
 Declare (or fetch) a dummy (or an actual) collection then simply point where the html block is and use the drill() method to iterate over the collection  
 ```php
-$collection = array( array('dummy_data' => 'foo'), 
-					 array('dummy_data' => 'bar') 
-					);
+$collection = array(array('dummy_data' => 'foo'), array('dummy_data' => 'bar'));
 $drillr->addToPath(__DIR__.'/public/templates/')->loadBlock('DrillrTest.html')->drill($collection);
 ```
 
@@ -45,12 +43,11 @@ Your output:
 
 B-but I need to output 'filtered foo' and 'filtered bar' instead, WELL I GOT YOU COVERED:
 ```php
-function testFilter($param)
-{
+function testFilter($param) {
     return 'filtered '. $param;
 }
 
-$drillr->addFilter('testFilter',array('dummy_data'), 'dummy_data')->drill($collection);
+$drillr->addFilter('testFilter', array('dummy_data'), 'dummy_data')->drill($collection);
 ```
 Will output:
 ```html
@@ -60,6 +57,5 @@ Will output:
 Theres a lot of other silly things you can do with Drillr and hopefully much more in the near future :)
 
 TODO:
- * Add perhaps demo folder with usage samples
- * Finish the testing suite :stuck_out_tongue_closed_eyes:
- * Add error handling
+ * Finish the testing suite
+ * Add more consistent error handling
