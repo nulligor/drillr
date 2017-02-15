@@ -1,20 +1,18 @@
 Drillr :cyclone:
 ====
 
-### Forget about for-each loops when iterating Markdown code
+### Forget about for-each loops when iterating HTML code
 
 Drillr is a pretty simple and straightforward library made to automate procedural for-each loops that iterates "view blocks" passing collections of data
-(which is a pretty common thing, even nowadays)
 
 ### A little background  
 
-The place I used to work (as a spaghetti PHP developer) had a pretty methodic workflow for deploying simple websites:
+The place I used to work had a pretty methodic workflow for deploying simple websites:
  * The Layout was made by the art guy
  * The Front-end guy translated it all to HTML code
- * Me, the back-end was responsible to code afterwards, on top of dozens of static pages
+ * And finally, me, had to inject code and functionality on top of dozen of static documents
 
-Well, the thing is, I didn't have much contact with MVC, or any frameworks and templating engines at all back in the day, so I had the idea to automate the for-each loops
-and encapsulate all the "blocks" into tiny template partials and reuse them as iterating blocks.
+I didn't have much contact with MVC, or any frameworks and templating engines concepts at all back in the day, so I had the idea to automate the for-each loops and encapsulate all the "blocks" into tiny template partials to make them reusable as iterating blocks.
 
 Using Drillr
 ----------
@@ -41,7 +39,7 @@ Your output:
 <span>foo</span><span>bar</span>
 ```
 
-B-but I need to output 'filtered foo' and 'filtered bar' instead, WELL I GOT YOU COVERED:
+You can even inject middlewares to model your data before drilling your collection:
 ```php
 function testFilter($param) {
     return 'filtered '. $param;
@@ -54,7 +52,7 @@ Will output:
 <span>filtered foo</span><span>filtered bar</span>
 ```
 
-Theres a lot of other silly things you can do with Drillr and hopefully much more in the near future :)
+You can also add HTML wrappers so your data gets output inside any arbitrary piece of HTML code you'd like and much more (not really much more). 
 
 TODO:
  * Finish the testing suite
