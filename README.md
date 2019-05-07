@@ -1,7 +1,7 @@
 Drillr :cyclone:
 ====
 
-### Forget about for-each loops when iterating HTML code
+### Forget about for-each loops when iterating Arbitrary Markdown
 
 Drillr is a pretty simple and straightforward library made to automate procedural for-each loops that iterates "view blocks" passing collections of data
 
